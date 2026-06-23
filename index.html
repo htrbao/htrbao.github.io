@@ -5,109 +5,625 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trong-Bao Ho</title>
     <link rel="icon" type="image/png" href="kaist.ico">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --accent:       #2563eb;
+            --accent-light: #eff6ff;
+            --text:         #1e293b;
+            --text-muted:   #64748b;
+            --border:       #e2e8f0;
+            --bg:           #f1f5f9;
+            --card:         #ffffff;
+            --gold:         #b45309;
+            --gold-bg:      #fef3c7;
+            --red:          #dc2626;
+            --red-bg:       #fee2e2;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── HERO ─────────────────────────────── */
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 20px;
+            padding: 48px 52px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+
+        .hero-info { flex: 1; min-width: 0; }
+
+        .hero-name {
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #1e293b 0%, #2563eb 55%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .hero-affiliation {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.75); }
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.74rem;
+            color: #16a34a;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 20px;
+            padding: 2px 9px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #16a34a;
+            flex-shrink: 0;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            transition: all 0.18s ease;
+        }
+
+        .hero-link:hover {
+            color: var(--accent);
+            border-color: #93c5fd;
+            background: var(--accent-light);
+        }
+
+        .hero-bio {
+            font-size: 0.93rem;
+            line-height: 1.8;
+            color: #334155;
+        }
+
+        .hero-bio a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-bio a:hover { text-decoration: underline; }
+
+        .profile-image {
+            position: relative;
+            width: 146px;
+            height: 146px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            z-index: 0;
+        }
+
+        .profile-image:hover { transform: scale(1.04); }
+
+        .profile-photo {
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+            border: 3px solid #fff;
+            z-index: 1;
+        }
+
+        /* ── SECTIONS ─────────────────────────── */
+        .section {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 40px 52px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 28px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        /* ── YEAR GROUPS ──────────────────────── */
+        .year-group { margin-bottom: 8px; }
+
+        .year-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .year-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── PUBLICATION CARD ─────────────────── */
+        .pub-card {
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .pub-card:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .pub-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+
+        .pub-authors {
+            font-size: 0.81rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            line-height: 1.65;
+        }
+
+        .pub-authors ins {
+            text-decoration: none;
+            color: #1e40af;
+            font-weight: 600;
+        }
+
+        .pub-venue {
+            font-size: 0.81rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pub-venue-name { font-style: italic; }
+
+        .pub-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--accent);
+            border: 1px solid #bfdbfe;
+            background: #eff6ff;
+            transition: all 0.18s ease;
+        }
+
+        .pub-link:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* ── BADGES ───────────────────────────── */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            vertical-align: middle;
+        }
+
+        .badge-spotlight {
+            background: var(--gold-bg);
+            color: var(--gold);
+            border: 1px solid #fcd34d;
+        }
+
+        .badge-best {
+            background: var(--red-bg);
+            color: var(--red);
+            border: 1px solid #fca5a5;
+        }
+
+        .badge-review {
+            background: #f5f3ff;
+            color: #6d28d9;
+            border: 1px solid #c4b5fd;
+        }
+
+        /* ── TIMELINE ─────────────────────────── */
+        .timeline { display: flex; flex-direction: column; }
+
+        .timeline-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .timeline-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-top: 1px;
+        }
+
+        .timeline-content { flex: 1; min-width: 0; }
+
+        .timeline-org {
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .timeline-detail {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .timeline-detail a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .timeline-detail a:hover { text-decoration: underline; }
+
+        /* ── SCROLL FADE-IN ──────────────────── */
+        .js-loaded .section {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .js-loaded .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ───────────────────────── */
+        @media (max-width: 640px) {
+            .hero {
+                flex-direction: column-reverse;
+                align-items: center;
+                padding: 32px 28px;
+                text-align: center;
+            }
+            .hero-links { justify-content: center; }
+            .section { padding: 32px 28px; }
+            .hero-name { font-size: 1.75rem; }
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container">
-      <div class="header-container">
-          <header class="post-header">
-              <h1 class="post-title">
-                  <span class="font-weight-bold">Trong-Bao Ho</span>
-              </h1>
-              <!-- <p class="desc"><i><b>KAIST Graduate school of AI</b></i></p> -->
-              <p>
-                  <a href="mailto:trbaohoo@gmail.com">[Mail]</a>
-                  <a href="https://github.com/htrbao" target="_blank">[GitHub]</a>
-                  <a href="https://scholar.google.com/citations?user=QBz-atMAAAAJ&hl=vi&oi=sra" target="_blank">[Google Scholar]</a>
-                  <a href="https://www.linkedin.com/in/bao-ho-trong-032231226/" target="_blank">[LinkedIn]</a>
-              </p>
-              <hr>
-              <div class="clearfix">
-                  <p>I am an Applied Engineer at VinRobotics, working on Learning from Demonstration. Previously, I was an AI Engineer at VNG ZingPlay Game Studios, focusing on reinforcement learning in games. I obtained my B.Sc. degree in Computer Science (Advanced Program in Computer Science) from the University of Science, Viet Nam National University Ho Chi Minh City (HCMUS) in 2024, advised by <a href="https://www.clc.hcmus.edu.vn/ddien/">Prof. Dien Dinh</a> and <a href="https://scholar.google.com/citations?hl=en&user=jECXavQAAAAJ&view_op=list_works&sortby=pubdate">Dr. Long Nguyen</a>.</p>
-              </div>
-          </header>
+<div class="container">
 
-          <div class="profile-image">
-              <img src="TrongBaoHo.png" alt="Trong-Bao Ho's Photo">
-          </div>
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-info">
+      <h1 class="hero-name">Trong-Bao Ho</h1>
+      <p class="hero-affiliation">
+        VinRobotics &nbsp;·&nbsp; Applied Engineer
+        <span class="status-pill"><span class="status-dot"></span>Learning from Demonstration</span>
+      </p>
+      <div class="hero-links">
+        <a class="hero-link" href="mailto:trbaohoo@gmail.com">
+          <i class="fa fa-envelope"></i> Email
+        </a>
+        <a class="hero-link" href="https://github.com/htrbao" target="_blank">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a class="hero-link" href="https://scholar.google.com/citations?user=QBz-atMAAAAJ&hl=vi&oi=sra" target="_blank">
+          <i class="fa fa-graduation-cap"></i> Google Scholar
+        </a>
+        <a class="hero-link" href="https://www.linkedin.com/in/bao-ho-trong-032231226/" target="_blank">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
       </div>
-
-    <!-- Latest News Section -->
-    <div class="publication-section">
-        <h2>Publications</h2>
-        <hr>
-        <h3>2024</h3>
-        <ul class="news-list">
-            <li>
-                Multi-perspective traffic video description model with fine-grained refinement approach<br>
-                Tuan-An To* , Minh-Nam Tran∗ , <ins><b>Trong-Bao Ho</b></ins>* , Thien-Loc Ha∗ , Quang-Tan Nguyen∗, Hoang-Chau Luong , Thanh-Duy Cao , and Minh-Triet Tran<br>
-                <i>CVPR Workshop 2024</i>
-                <br><a href="https://openaccess.thecvf.com/content/CVPR2024W/AICity/papers/To_Multi-perspective_Traffic_Video_Description_Model_with_Fine-grained_Refinement_Approach_CVPRW_2024_paper.pdf">[paper]</a> <a href="https://github.com/ToTuanAn/AICityChallenge2024_Track2">[code]</a>
-            </li>
-        </ul>
-        <ul class="news-list">
-            <li>
-                Auto Graph of Thoughts: A Hands-free and Cost Effective Method for using Graph of Thoughts<br>
-                Thien-Loc Ha*, <ins><b>Trong-Bao Ho</b></ins>*, Long Nguyen, Dien Dinh<br>
-                <i>ICCTA 2024</i>
-                <br><a href="https://dl.acm.org/doi/abs/10.1145/3674558.3674574">[paper]</a> <a href="https://github.com/hathienloc131/auto-graph-of-thoughts">[code]</a>
-            </li>
-        </ul>
-
-        <hr>
-        <h3>2023</h3>
-        
-        <ul class="news-list">
-            <li>
-                Vi-ATISO: An Effective Video Search Engine at AI Challenge HCMC 2023<br>
-                Quang-Tan Nguyen*, Xuan-Quang Nguyen*, <ins><b>Trong-Bao Ho</b></ins>*, Duc-Thang Truong, Minh-Hoang Le<br>
-                <i>SoICT 2023</i>
-                <br><a href="https://dl.acm.org/doi/abs/10.1145/3628797.3628997">[paper]</a> <a href="https://github.com/nxquang-al/vi-atiso">[code]</a></p> 
-            </li>
-        </ul>
+      <p class="hero-bio">
+        I am an Applied Engineer at VinRobotics, working on Learning from Demonstration.
+        Previously, I was an AI Engineer at VNG ZingPlay Game Studios, focusing on reinforcement learning in games.
+        I obtained my B.Sc. degree in Computer Science (Advanced Program in Computer Science) from
+        the University of Science, Viet Nam National University Ho Chi Minh City (HCMUS) in 2024,
+        advised by <a href="https://www.clc.hcmus.edu.vn/ddien/">Prof. Dien Dinh</a> and
+        <a href="https://scholar.google.com/citations?hl=en&user=jECXavQAAAAJ&view_op=list_works&sortby=pubdate">Dr. Long Nguyen</a>.
+      </p>
     </div>
-    <!-- Education Section -->
-    <div class="education-section">
-        <h2>Education</h2>
-        <hr>
-
-        <ul class="education-list">
-            <li>
-                <strong>HCMUS CS</strong><br>
-                B.S. in Computer Science, <i>2020 - 2024</i><br>
-                Advisor: Long Nguyen, Dien Dinh<br>
-                <span style="font-size: small;">Thesis: Exploring Methods for Searching Effective Prompting Strategies in Large Language Models<br></span>
-            </li>
-        </ul>
-    </div>
-    <div class="work-experience-section">
-        <h2>Work Experience</h2>
-        <hr>
-    
-        <ul class="work-list">
-            <li>
-                <strong>VinRobotics</strong><br>
-                Applied Engineer, <i>Jun 2025 - Present</i><br>
-            </li>
-            <li>
-                <strong>VNG Zingplay Game Studios</strong><br>
-                AI Engineer, <i>Dec 2023 - Jun 2025</i><br>
-            </li>
-            <li>
-                <strong>VNG Zingplay Game Studios</strong><br>
-                AI Intern, <i>Mar 2023 - Dec 2023</i><br>
-            </li>
-            <!-- Add more work experiences if needed -->
-        </ul>
+    <div class="profile-image">
+      <div class="profile-photo" style="background-image: url('TrongBaoHo.png')"></div>
     </div>
   </div>
 
-</head>
+  <!-- ── PUBLICATIONS ── -->
+  <div class="section">
+    <h2 class="section-title"><i class="fa fa-book-open"></i> Publications</h2>
 
-<body>
-    <!-- ...existing code... -->
-    <script src="script.js"></script>
+    <!-- 2026 -->
+    <div class="year-group">
+      <div class="year-label">2026</div>
+
+      <div class="pub-card">
+        <div class="pub-title">EquiVLA: A General Framework for Rotationally Equivariant Vision-Language-Action Models</div>
+        <div class="pub-authors">
+          Thien-Loc Ha*, Quang-Tan Nguyen*, <ins>Trong-Bao Ho*</ins>, L. Dinh, MD. Nguyen, GB. Nguyen, PT. Quang, et al.
+        </div>
+        <div class="pub-venue">
+          <span class="pub-venue-name">arXiv 2026</span>
+          <span class="badge badge-review"><i class="fa fa-clock"></i> Under Review</span>
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/abs/2606.19784">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-title">Finetuning Vision-Language-Action Models Requires Fewer Layers Than You Think</div>
+        <div class="pub-authors">
+          GB. Nguyen, <ins>Trong-Bao Ho</ins>, Thien-Loc Ha, K. Vo, PL. Møller, Quang-Tan Nguyen, L. Dinh, T. Dam, et al.
+        </div>
+        <div class="pub-venue">
+          <span class="pub-venue-name">arXiv 2026</span>
+          <span class="badge badge-review"><i class="fa fa-clock"></i> Under Review</span>
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/abs/2606.20246">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-title">Start Right, Arrive Right: Asynchronous Execution via Initial Noise Selection</div>
+        <div class="pub-authors">
+          <ins>Trong-Bao Ho*</ins>, Quang-Tan Nguyen*, Thien-Loc Ha*, GB. Nguyen, VT. Nguyen, L. Dinh, MN. Vu, et al.
+        </div>
+        <div class="pub-venue">
+          <span class="pub-venue-name">arXiv 2026</span>
+          <span class="badge badge-review"><i class="fa fa-clock"></i> Under Review</span>
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/abs/2606.19774">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-group">
+      <div class="year-label">2024</div>
+
+      <div class="pub-card">
+        <div class="pub-title">Multi-perspective traffic video description model with fine-grained refinement approach</div>
+        <div class="pub-authors">
+          Tuan-An To*, Minh-Nam Tran*, <ins>Trong-Bao Ho</ins>*, Thien-Loc Ha*, Quang-Tan Nguyen*, Hoang-Chau Luong, Thanh-Duy Cao, and Minh-Triet Tran
+        </div>
+        <div class="pub-venue"><span class="pub-venue-name">CVPR Workshop 2024</span></div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2024W/AICity/papers/To_Multi-perspective_Traffic_Video_Description_Model_with_Fine-grained_Refinement_Approach_CVPRW_2024_paper.pdf">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+          <a class="pub-link" href="https://github.com/ToTuanAn/AICityChallenge2024_Track2">
+            <i class="fab fa-github"></i> code
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card">
+        <div class="pub-title">Auto Graph of Thoughts: A Hands-free and Cost Effective Method for using Graph of Thoughts</div>
+        <div class="pub-authors">
+          Thien-Loc Ha*, <ins>Trong-Bao Ho</ins>*, Long Nguyen, Dien Dinh
+        </div>
+        <div class="pub-venue"><span class="pub-venue-name">ICCTA 2024</span></div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3674558.3674574">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+          <a class="pub-link" href="https://github.com/hathienloc131/auto-graph-of-thoughts">
+            <i class="fab fa-github"></i> code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <div class="year-group">
+      <div class="year-label">2023</div>
+
+      <div class="pub-card">
+        <div class="pub-title">Vi-ATISO: An Effective Video Search Engine at AI Challenge HCMC 2023</div>
+        <div class="pub-authors">
+          Quang-Tan Nguyen*, Xuan-Quang Nguyen*, <ins>Trong-Bao Ho</ins>*, Duc-Thang Truong, Minh-Hoang Le
+        </div>
+        <div class="pub-venue"><span class="pub-venue-name">SoICT 2023</span></div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3628797.3628997">
+            <i class="fa fa-file-pdf"></i> paper
+          </a>
+          <a class="pub-link" href="https://github.com/nxquang-al/vi-atiso">
+            <i class="fab fa-github"></i> code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EDUCATION ── -->
+  <div class="section">
+    <h2 class="section-title"><i class="fa fa-graduation-cap"></i> Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fa fa-university"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-org">HCMUS CS</div>
+          <div class="timeline-detail">
+            B.S. in Computer Science &nbsp;·&nbsp; 2020 – 2024<br>
+            Advisor: Long Nguyen, Dien Dinh<br>
+            Thesis: Exploring Methods for Searching Effective Prompting Strategies in Large Language Models
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORK EXPERIENCE ── -->
+  <div class="section">
+    <h2 class="section-title"><i class="fa fa-briefcase"></i> Work Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fa fa-robot"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-org">VinRobotics</div>
+          <div class="timeline-detail">Applied Engineer &nbsp;·&nbsp; Jun 2025 – Present</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fa fa-gamepad"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-org">VNG ZingPlay Game Studios</div>
+          <div class="timeline-detail">AI Engineer &nbsp;·&nbsp; Dec 2023 – Jun 2025</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fa fa-flask"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-org">VNG ZingPlay Game Studios</div>
+          <div class="timeline-detail">AI Intern &nbsp;·&nbsp; Mar 2023 – Dec 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="script.js"></script>
 </body>
-
 </html>
