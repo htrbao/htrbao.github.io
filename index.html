@@ -24,6 +24,8 @@
             --gold-bg:      #fef3c7;
             --red:          #dc2626;
             --red-bg:       #fee2e2;
+            --green:        #15803d;
+            --green-bg:     #dcfce7;
         }
 
         body {
@@ -346,6 +348,12 @@
             border: 1px solid #c4b5fd;
         }
 
+        .badge-accept {
+            background: var(--green-bg);
+            color: var(--green);
+            border: 1px solid #86efac;
+        }
+
         /* ── TIMELINE ─────────────────────────── */
         .timeline { display: flex; flex-direction: column; }
 
@@ -475,8 +483,12 @@
           <ins>Trong-Bao Ho*</ins>, Quang-Tan Nguyen*, Thien-Loc Ha*, Gia-Binh Nguyen, Viet-Thanh Nguyen, Long Dinh, Minh N Vu, Duy MH Nguyen, An Thai Le, Ngo Anh Vien
         </div>
         <div class="pub-venue">
-          <span class="pub-venue-name">arXiv 2026</span>
-          <span class="badge badge-review"><i class="fa fa-clock"></i> Under Review</span>
+          <span class="pub-venue-name">CoRL 2026</span>
+          <span class="badge badge-accept"><i class="fa fa-check"></i> Accepted</span>
+        </div>
+        <div class="pub-venue">
+          <span class="pub-venue-name">Diff4RL @ RSSW 2026</span>
+          <span class="badge badge-spotlight"><i class="fa fa-star"></i> Spotlight</span>
         </div>
         <div class="pub-links">
           <a class="pub-link" href="https://arxiv.org/abs/2606.19774">
