@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trong-Bao Ho | Foundation AI Engineer at VinRobotics</title>
+    <title>Trong-Bao Ho</title>
     <meta name="description" content="Trong-Bao Ho is a Foundation AI Engineer at VinRobotics working on Vision-Language-Action models and Imitation Learning, advised by An Thai Le and Ngo Anh Vien.">
     <meta name="author" content="Trong-Bao Ho">
     <meta name="keywords" content="Trong-Bao Ho, VinRobotics, Vision-Language-Action, Imitation Learning, Robot Learning, AI Engineer, HCMUS">
@@ -44,34 +44,36 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
             --accent:       #2563eb;
-            --accent-light: #eff6ff;
-            --text:         #1e293b;
+            --accent-dark:  #1d4ed8;
+            --text:         #0f172a;
             --text-muted:   #64748b;
             --border:       #e2e8f0;
             --bg:           #f1f5f9;
             --card:         #ffffff;
-            --gold:         #b45309;
-            --gold-bg:      #fef3c7;
-            --red:          #dc2626;
-            --red-bg:       #fee2e2;
+            --award:        #b91c1c;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-weight: 300;
             background-color: var(--bg);
             background-image: radial-gradient(var(--border) 1px, transparent 1px);
             background-size: 24px 24px;
             color: var(--text);
-            line-height: 1.6;
-            font-size: 15px;
+            line-height: 1.65;
+            font-size: 15.5px;
         }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
         .container {
             max-width: 880px;
@@ -79,23 +81,20 @@
             padding: 48px 24px 80px;
         }
 
-        /* ── HERO ─────────────────────────────── */
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        /* ── CARDS (template) ─────────────────── */
+        .hero, .section {
+            background: var(--card);
+            border-radius: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
         }
 
+        /* ── HEADER CARD ──────────────────────── */
         .hero {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 20px;
-            padding: 48px 52px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
-            display: flex;
-            gap: 48px;
-            align-items: flex-start;
-            margin-bottom: 20px;
+            padding: 48px 52px 44px;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
         }
 
         .hero::before {
@@ -103,352 +102,163 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
-            background-size: 200% 100%;
-            animation: shimmer 4s linear infinite;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+        }
+
+        .hero-top {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .hero-info { flex: 1; min-width: 0; }
 
         .hero-name {
-            font-size: 2.1rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #1e293b 0%, #2563eb 55%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
+            font-weight: 400;
+            font-size: 2.6rem;
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 8px;
         }
+
+        .hero-name b { font-weight: 700; }
 
         .hero-affiliation {
-            font-size: 0.9rem;
             color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
+            font-weight: 300;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.4; transform: scale(0.75); }
+        .hero-links { font-size: 1rem; font-weight: 400; }
+        .hero-links a + a::before {
+            content: '/';
+            color: #94a3b8;
+            margin: 0 10px;
+            display: inline-block;
         }
+        .hero-links a:hover { text-decoration: none; color: var(--accent-dark); }
 
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.74rem;
-            color: #16a34a;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 20px;
-            padding: 2px 9px;
-            font-weight: 500;
-        }
+        .hero-bio { margin-top: 28px; color: #334155; }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #16a34a;
-            flex-shrink: 0;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        .hero-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
-        .hero-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            text-decoration: none;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            background: #f8fafc;
-            transition: all 0.18s ease;
-        }
-
-        .hero-link:hover {
-            color: var(--accent);
-            border-color: #93c5fd;
-            background: var(--accent-light);
-        }
-
-        .hero-bio {
-            font-size: 0.93rem;
-            line-height: 1.8;
-            color: #334155;
-        }
-
-        .hero-bio a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .hero-bio a:hover { text-decoration: underline; }
-
-        .profile-image {
-            position: relative;
-            width: 146px;
-            height: 146px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
-
-        .profile-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            z-index: 0;
-        }
-
-        .profile-image:hover { transform: scale(1.04); }
+        /* portrait: soft rounded rectangle, light frame */
+        .profile-image { width: 176px; flex-shrink: 0; }
 
         .profile-photo {
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.14);
-            border: 3px solid #fff;
-            z-index: 1;
+            width: 176px;
+            height: 220px;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            background: #e2e8f0;
+            box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08), 0 8px 24px -8px rgba(15, 23, 42, 0.25);
         }
 
-        /* ── SECTIONS ─────────────────────────── */
-        .section {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 40px 52px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
+        .profile-photo img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center 30%;
+            opacity: 0; transition: opacity .6s ease;
         }
+        .profile-photo img.active { opacity: 1; }
+        .profile-photo.multi { cursor: pointer; }
+
+        /* ── SECTION CARDS ────────────────────── */
+        .section { padding: 36px 52px 40px; }
 
         .section-title {
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-weight: 300;
+            font-size: 1.7rem;
+            line-height: 1.3;
             color: var(--text);
-            letter-spacing: -0.01em;
-            margin-bottom: 28px;
-            padding-bottom: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
             border-bottom: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .section-title i {
-            color: var(--accent);
-            font-size: 0.95rem;
+        /* ── PUBLICATIONS ─────────────────────── */
+        .year-group {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            margin-bottom: 4px;
         }
-
-        /* ── YEAR GROUPS ──────────────────────── */
-        .year-group { margin-bottom: 8px; }
 
         .year-label {
-            font-size: 0.72rem;
-            font-weight: 700;
             color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            padding-top: 15px;
         }
 
-        .year-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
+        .year-items { min-width: 0; }
 
-        /* ── PUBLICATION CARD ─────────────────── */
-        .pub-card {
-            padding: 16px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
+        .pub-card { padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+        .year-items .pub-card:last-child { border-bottom: none; }
 
-        .pub-card:last-child { border-bottom: none; padding-bottom: 0; }
+        .pub-title { font-weight: 700; line-height: 1.45; margin-bottom: 2px; }
 
-        .pub-title {
-            font-size: 0.92rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 5px;
-            line-height: 1.5;
-        }
+        .pub-authors { font-size: 0.93rem; color: #475569; font-weight: 300; line-height: 1.6; }
+        .pub-authors ins { text-decoration: none; font-weight: 700; color: var(--text); }
 
-        .pub-authors {
-            font-size: 0.81rem;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-            line-height: 1.65;
-        }
-
-        .pub-authors ins {
-            text-decoration: none;
-            color: #1e40af;
-            font-weight: 600;
-        }
-
-        .pub-venue {
-            font-size: 0.81rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 6px;
-        }
-
+        .pub-venue { font-size: 0.92rem; color: #475569; margin-top: 2px; }
         .pub-venue-name { font-style: italic; }
 
-        .pub-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
+        .badge { font-style: normal; font-weight: 700; color: var(--award); }
+        .badge-spotlight::before { content: '('; }
+        .badge-spotlight::after  { content: ')'; }
+
+        .pub-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 
         .pub-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-decoration: none;
-            color: var(--accent);
+            display: inline-block;
+            padding: 3px 14px;
             border: 1px solid #bfdbfe;
+            border-radius: 8px;
             background: #eff6ff;
-            transition: all 0.18s ease;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.5;
+            transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
         }
 
         .pub-link:hover {
             background: var(--accent);
-            color: #fff;
             border-color: var(--accent);
-        }
-
-        /* ── BADGES ───────────────────────────── */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            vertical-align: middle;
-        }
-
-        .badge-spotlight {
-            background: var(--gold-bg);
-            color: var(--gold);
-            border: 1px solid #fcd34d;
-        }
-
-        .badge-best {
-            background: var(--red-bg);
-            color: var(--red);
-            border: 1px solid #fca5a5;
-        }
-
-        /* ── TIMELINE ─────────────────────────── */
-        .timeline { display: flex; flex-direction: column; }
-
-        .timeline-item {
-            padding: 16px 0;
-            border-bottom: 1px solid #f1f5f9;
-            display: flex;
-            gap: 18px;
-            align-items: flex-start;
-        }
-
-        .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-        .timeline-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            background: var(--accent-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--accent);
-            font-size: 0.85rem;
-            margin-top: 1px;
-        }
-
-        .timeline-content { flex: 1; min-width: 0; }
-
-        .timeline-org {
-            font-size: 0.93rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 2px;
-        }
-
-        .timeline-detail {
-            font-size: 0.83rem;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
-        .timeline-detail a {
-            color: var(--accent);
+            color: #fff;
             text-decoration: none;
+            transform: translateY(-1px);
         }
 
-        .timeline-detail a:hover { text-decoration: underline; }
-
-        /* ── SCROLL FADE-IN ──────────────────── */
-        .js-loaded .section {
-            opacity: 0;
-            transform: translateY(18px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+        /* ── EDUCATION / EXPERIENCE ───────────── */
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
         }
+        .timeline-item:last-child { border-bottom: none; }
 
-        .js-loaded .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .timeline-date { color: var(--accent); font-size: 0.93rem; font-weight: 400; }
+        .timeline-date b { font-weight: 700; }
+
+        .timeline-org { font-weight: 700; }
+        .timeline-detail { color: #475569; font-size: 0.93rem; line-height: 1.65; }
+        .timeline-detail a { color: var(--accent); }
 
         /* ── RESPONSIVE ───────────────────────── */
         @media (max-width: 640px) {
-            .hero {
-                flex-direction: column-reverse;
-                align-items: center;
-                padding: 32px 28px;
-                text-align: center;
-            }
-            .hero-links { justify-content: center; }
-            .section { padding: 32px 28px; }
-            .hero-name { font-size: 1.75rem; }
+            .container { padding: 28px 14px 56px; }
+            .hero { padding: 32px 26px; }
+            .section { padding: 28px 26px 30px; }
+            .hero-top { flex-direction: column-reverse; align-items: flex-start; gap: 22px; }
+            .hero-name { font-size: 2rem; }
+            .year-group { grid-template-columns: 1fr; }
+            .year-label { padding-top: 10px; }
+            .timeline-item { grid-template-columns: 1fr; gap: 0; }
         }
     </style>
 </head>
@@ -458,33 +268,27 @@
 
   <!-- ── HERO ── -->
   <div class="hero">
+   <div class="hero-top">
     <div class="hero-info">
-      <h1 class="hero-name">Trong-Bao Ho</h1>
+      <h1 class="hero-name"><b>Trong-Bao</b> Ho</h1>
       <p class="hero-affiliation">
         VinRobotics &nbsp;·&nbsp; Foundation AI Engineer
-        <span class="status-pill"><span class="status-dot"></span>Learning from Demonstration</span>
       </p>
       <div class="hero-links">
-        <a class="hero-link" href="mailto:trbaohoo@gmail.com">
-          <i class="fa fa-envelope"></i> Email
-        </a>
-        <a class="hero-link" href="resume/resume.pdf" target="_blank" rel="noopener">
-          <i class="fa fa-file-pdf"></i> CV
-        </a>
-        <a class="hero-link" href="https://github.com/htrbao" target="_blank">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <a class="hero-link" href="https://scholar.google.com/citations?user=QBz-atMAAAAJ&hl=vi&oi=sra" target="_blank">
-          <i class="fa fa-graduation-cap"></i> Google Scholar
-        </a>
-        <a class="hero-link" href="https://www.linkedin.com/in/bao-ho-trong-032231226/" target="_blank">
-          <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-        <a class="hero-link" href="https://x.com/htrbao" target="_blank">
-          <i class="fab fa-x-twitter"></i> X
-        </a>
+        <a href="resume/resume.pdf" target="_blank" rel="noopener">CV</a>
+        <a href="mailto:trbaohoo@gmail.com">Email</a>
+        <a href="https://scholar.google.com/citations?user=QBz-atMAAAAJ&hl=vi&oi=sra" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://github.com/htrbao" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/bao-ho-trong-032231226/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/htrbao" target="_blank" rel="noopener">X</a>
       </div>
-      <p class="hero-bio">
+    </div>
+    <div class="profile-image">
+      <div class="profile-photo" id="avatar" aria-label="Photos of Trong-Bao Ho"></div>
+    </div>
+   </div>
+
+    <p class="hero-bio">
         I am a Foundation AI Engineer at VinRobotics, working on Vision-Language-Action models and Imitation Learning,
         advised by <a href="https://anindex.github.io">Dr. An Thai Le</a> and
         <a href="https://vienngo.github.io">Dr. Ngo Anh Vien</a>.
@@ -494,19 +298,16 @@
         advised by <a href="https://www.clc.hcmus.edu.vn/ddien/">Prof. Dien Dinh</a> and
         <a href="https://scholar.google.com/citations?hl=en&user=jECXavQAAAAJ&view_op=list_works&sortby=pubdate">Dr. Long Nguyen</a>.
       </p>
-    </div>
-    <div class="profile-image">
-      <div class="profile-photo" style="background-image: url('TrongBaoHo.JPG')"></div>
-    </div>
   </div>
 
   <!-- ── PUBLICATIONS ── -->
   <div class="section">
-    <h2 class="section-title"><i class="fa fa-book-open"></i> Publications</h2>
+    <h2 class="section-title">Publications</h2>
 
     <!-- 2026 -->
     <div class="year-group">
       <div class="year-label">2026</div>
+      <div class="year-items">
 
       <div class="pub-card">
         <div class="pub-title">Start Right, Arrive Right: Asynchronous Execution via Initial Noise Selection</div>
@@ -517,12 +318,10 @@
           <span class="pub-venue-name">CoRL 2026</span>
           &nbsp;·&nbsp;
           <span class="pub-venue-name">Diff4RL @ RSSW 2026</span>
-          <span class="badge badge-spotlight"><i class="fa fa-star"></i> Spotlight</span>
+          <span class="badge badge-spotlight">Spotlight</span>
         </div>
         <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/abs/2606.19774">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
+          <a class="pub-link" href="https://arxiv.org/abs/2606.19774">paper</a>
         </div>
       </div>
 
@@ -532,9 +331,7 @@
           Gia-Binh Nguyen, <ins>Trong-Bao Ho</ins>, Thien-Loc Ha, Khoa Vo, Philip Lund Møller, Quang T Nguyen, Long Dinh, Tuan Dam, Vu Duong, Tung M Luu, Trung Le, Tran Nguyen Le, Minh Vu, An Thai Le, Ngan Le, Daniel Sonntag, James Zou, Jan Peters, Duy MH Nguyen, Ngo Anh Vien
         </div>
         <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/abs/2606.20246">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
+          <a class="pub-link" href="https://arxiv.org/abs/2606.20246">paper</a>
         </div>
       </div>
 
@@ -544,9 +341,7 @@
           Thien-Loc Ha*, Quang-Tan Nguyen*, <ins>Trong-Bao Ho*</ins>, Long Dinh, Minh Duc Nguyen, Gia-Binh Nguyen, Pham Tri Quang, Minh N Vu, Duy MH Nguyen, An Thai Le, Ngo Anh Vien
         </div>
         <div class="pub-links">
-          <a class="pub-link" href="https://arxiv.org/abs/2606.19784">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
+          <a class="pub-link" href="https://arxiv.org/abs/2606.19784">paper</a>
         </div>
       </div>
 
@@ -559,16 +354,16 @@
           <span class="pub-venue-name">ICML 2026</span>
         </div>
         <div class="pub-links">
-          <a class="pub-link" href="https://icml.cc/virtual/2026/poster/66754">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
+          <a class="pub-link" href="https://icml.cc/virtual/2026/poster/66754">paper</a>
         </div>
+      </div>
       </div>
     </div>
 
     <!-- 2024 -->
     <div class="year-group">
       <div class="year-label">2024</div>
+      <div class="year-items">
 
       <div class="pub-card">
         <div class="pub-title">Multi-perspective traffic video description model with fine-grained refinement approach</div>
@@ -577,12 +372,8 @@
         </div>
         <div class="pub-venue"><span class="pub-venue-name">CVPR Workshop 2024</span></div>
         <div class="pub-links">
-          <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2024W/AICity/papers/To_Multi-perspective_Traffic_Video_Description_Model_with_Fine-grained_Refinement_Approach_CVPRW_2024_paper.pdf">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
-          <a class="pub-link" href="https://github.com/ToTuanAn/AICityChallenge2024_Track2">
-            <i class="fab fa-github"></i> code
-          </a>
+          <a class="pub-link" href="https://openaccess.thecvf.com/content/CVPR2024W/AICity/papers/To_Multi-perspective_Traffic_Video_Description_Model_with_Fine-grained_Refinement_Approach_CVPRW_2024_paper.pdf">paper</a>
+          <a class="pub-link" href="https://github.com/ToTuanAn/AICityChallenge2024_Track2">code</a>
         </div>
       </div>
 
@@ -593,19 +384,17 @@
         </div>
         <div class="pub-venue"><span class="pub-venue-name">ICCTA 2024</span></div>
         <div class="pub-links">
-          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3674558.3674574">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
-          <a class="pub-link" href="https://github.com/hathienloc131/auto-graph-of-thoughts">
-            <i class="fab fa-github"></i> code
-          </a>
+          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3674558.3674574">paper</a>
+          <a class="pub-link" href="https://github.com/hathienloc131/auto-graph-of-thoughts">code</a>
         </div>
+      </div>
       </div>
     </div>
 
     <!-- 2023 -->
     <div class="year-group">
       <div class="year-label">2023</div>
+      <div class="year-items">
 
       <div class="pub-card">
         <div class="pub-title">Vi-ATISO: An Effective Video Search Engine at AI Challenge HCMC 2023</div>
@@ -614,28 +403,25 @@
         </div>
         <div class="pub-venue"><span class="pub-venue-name">SoICT 2023</span></div>
         <div class="pub-links">
-          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3628797.3628997">
-            <i class="fa fa-file-pdf"></i> paper
-          </a>
-          <a class="pub-link" href="https://github.com/nxquang-al/vi-atiso">
-            <i class="fab fa-github"></i> code
-          </a>
+          <a class="pub-link" href="https://dl.acm.org/doi/abs/10.1145/3628797.3628997">paper</a>
+          <a class="pub-link" href="https://github.com/nxquang-al/vi-atiso">code</a>
         </div>
+      </div>
       </div>
     </div>
   </div>
 
   <!-- ── EDUCATION ── -->
   <div class="section">
-    <h2 class="section-title"><i class="fa fa-graduation-cap"></i> Education</h2>
+    <h2 class="section-title">Education</h2>
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-icon"><i class="fa fa-university"></i></div>
+        <div class="timeline-date">2020 – 2024</div>
         <div class="timeline-content">
           <div class="timeline-org">HCMUS CS</div>
           <div class="timeline-detail">
-            B.S. in Computer Science &nbsp;·&nbsp; 2020 – 2024<br>
-            Advisor: Long Nguyen, Dien Dinh<br>
+            B.S. in Computer Science<br>
+            Advisor: <a href="https://www.clc.hcmus.edu.vn/ddien/">Dien Dinh</a>, Long Nguyen<br>
             Thesis: Exploring Methods for Searching Effective Prompting Strategies in Large Language Models
           </div>
         </div>
@@ -645,31 +431,31 @@
 
   <!-- ── WORK EXPERIENCE ── -->
   <div class="section">
-    <h2 class="section-title"><i class="fa fa-briefcase"></i> Work Experience</h2>
+    <h2 class="section-title">Work Experience</h2>
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-icon"><i class="fa fa-robot"></i></div>
+        <div class="timeline-date">Jun 2025 – <b>Now</b></div>
         <div class="timeline-content">
           <div class="timeline-org">VinRobotics</div>
           <div class="timeline-detail">
-            Foundation AI Engineer &nbsp;·&nbsp; Jun 2025 – Present<br>
+            Foundation AI Engineer<br>
             Working with <a href="https://anindex.github.io">An Thai Le</a> and
             <a href="https://vienngo.github.io">Vien Ngo</a>
           </div>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-icon"><i class="fa fa-gamepad"></i></div>
+        <div class="timeline-date">Dec 2023 – Jun 2025</div>
         <div class="timeline-content">
           <div class="timeline-org">VNG ZingPlay Game Studios</div>
-          <div class="timeline-detail">AI Engineer &nbsp;·&nbsp; Dec 2023 – Jun 2025</div>
+          <div class="timeline-detail">AI Engineer</div>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-icon"><i class="fa fa-flask"></i></div>
+        <div class="timeline-date">Mar 2023 – Dec 2023</div>
         <div class="timeline-content">
           <div class="timeline-org">VNG ZingPlay Game Studios</div>
-          <div class="timeline-detail">AI Intern &nbsp;·&nbsp; Mar 2023 – Dec 2023</div>
+          <div class="timeline-detail">AI Intern</div>
         </div>
       </div>
     </div>
